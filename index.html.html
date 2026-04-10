@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Base</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card: #161618;
+    --border: #252528;
+    --text: #ede9e0;
+    --muted: #5a5760;
+    --soft: #2a2a2f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 36px 20px 60px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    margin-bottom: 36px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .greeting {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  .date {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 6px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .divider {
+    width: 32px;
+    height: 1px;
+    background: var(--border);
+    margin: 16px 0;
+  }
+
+  /* GRID */
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* CARD */
+  .card {
+    border-radius: 16px;
+    padding: 22px 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    animation: fadeUp 0.5s ease both;
+    cursor: pointer;
+  }
+
+  .card:active {
+    transform: scale(0.98);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    border-radius: 16px;
+  }
+
+  /* CARD COLORS */
+  .card-work {
+    background: linear-gradient(135deg, #1a1810 0%, #161614 100%);
+    border-color: rgba(201,169,110,0.2);
+  }
+  .card-work::before { background: #c9a96e; }
+  .card-work .accent { color: #c9a96e; }
+  .card-work .icon-wrap { background: rgba(201,169,110,0.1); border-color: rgba(201,169,110,0.15); }
+
+  .card-corps {
+    background: linear-gradient(135deg, #101814 0%, #121614 100%);
+    border-color: rgba(126,184,164,0.2);
+  }
+  .card-corps::before { background: #7eb8a4; }
+  .card-corps .accent { color: #7eb8a4; }
+  .card-corps .icon-wrap { background: rgba(126,184,164,0.1); border-color: rgba(126,184,164,0.15); }
+
+  .card-business {
+    background: linear-gradient(135deg, #1a1210 0%, #161413 100%);
+    border-color: rgba(212,132,122,0.2);
+  }
+  .card-business::before { background: #d4847a; }
+  .card-business .accent { color: #d4847a; }
+  .card-business .icon-wrap { background: rgba(212,132,122,0.1); border-color: rgba(212,132,122,0.15); }
+
+  .card-finances {
+    background: linear-gradient(135deg, #101318 0%, #121416 100%);
+    border-color: rgba(138,172,204,0.2);
+  }
+  .card-finances::before { background: #8aaccc; }
+  .card-finances .accent { color: #8aaccc; }
+  .card-finances .icon-wrap { background: rgba(138,172,204,0.1); border-color: rgba(138,172,204,0.15); }
+
+  .card-perso {
+    background: linear-gradient(135deg, #141018 0%, #141216 100%);
+    border-color: rgba(184,155,207,0.2);
+  }
+  .card-perso::before { background: #b89bcf; }
+  .card-perso .accent { color: #b89bcf; }
+  .card-perso .icon-wrap { background: rgba(184,155,207,0.1); border-color: rgba(184,155,207,0.15); }
+
+  .card-voyages {
+    background: linear-gradient(135deg, #181510 0%, #161412 100%);
+    border-color: rgba(212,167,106,0.2);
+  }
+  .card-voyages::before { background: #d4a76a; }
+  .card-voyages .accent { color: #d4a76a; }
+  .card-voyages .icon-wrap { background: rgba(212,167,106,0.1); border-color: rgba(212,167,106,0.15); }
+
+  /* ICON */
+  .icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  /* TEXT */
+  .card-text {
+    flex: 1;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 4px;
+  }
+
+  .card-sub {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+
+  /* ARROW */
+  .arrow {
+    font-size: 0.9rem;
+    opacity: 0.3;
+    flex-shrink: 0;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.08s; }
+  .card:nth-child(2) { animation-delay: 0.14s; }
+  .card:nth-child(3) { animation-delay: 0.20s; }
+  .card:nth-child(4) { animation-delay: 0.26s; }
+  .card:nth-child(5) { animation-delay: 0.32s; }
+  .card:nth-child(6) { animation-delay: 0.38s; }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="greeting">Home Base</div>
+  <div class="date" id="dateDisplay"></div>
+  <div class="divider"></div>
+</div>
+
+<div class="grid">
+
+  <a class="card card-work" href="LIEN_WORK">
+    <div class="icon-wrap">💼</div>
+    <div class="card-text">
+      <div class="card-title accent">Work</div>
+      <div class="card-sub">Projets · Réunions · Ressources</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a class="card card-corps" href="LIEN_CORPS">
+    <div class="icon-wrap">🏋️</div>
+    <div class="card-text">
+      <div class="card-title accent">Corps & Santé</div>
+      <div class="card-sub">Entraînements · Nutrition · Visbody</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a class="card card-business" href="LIEN_BUSINESS">
+    <div class="icon-wrap">💡</div>
+    <div class="card-text">
+      <div class="card-title accent">Business</div>
+      <div class="card-sub">Idées · Projets · Templates</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a class="card card-finances" href="LIEN_FINANCES">
+    <div class="icon-wrap">💰</div>
+    <div class="card-text">
+      <div class="card-title accent">Finances</div>
+      <div class="card-sub">Budget · Investissements · Collections</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a class="card card-perso" href="LIEN_PERSO">
+    <div class="icon-wrap">🌿</div>
+    <div class="card-text">
+      <div class="card-title accent">Vie Perso</div>
+      <div class="card-sub">Routines · Journal · Spiritualité</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <a class="card card-voyages" href="LIEN_VOYAGES">
+    <div class="icon-wrap">✈️</div>
+    <div class="card-text">
+      <div class="card-title accent">Voyages</div>
+      <div class="card-sub">Wishlist · Itinéraires · Souvenirs</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+</div>
+
+<div class="footer">Ton univers · Notion</div>
+
+<script>
+  const d = new Date();
+  const opts = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+  document.getElementById('dateDisplay').textContent = d.toLocaleDateString('fr-FR', opts);
+</script>
+
+</body>
+</html>
